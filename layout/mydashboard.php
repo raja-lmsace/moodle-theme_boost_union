@@ -15,15 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Theme Boost Union - Drawers page layout.
+ * Theme Boost Union - mydashboard page layout.
  *
- * This layoutfile is based on theme/boost/layout/drawers.php
+ * This layoutfile is based on theme/boost/layout/mydashboard.php
  *
- * Modifications compared to this layout file:
- * * Include footnote
- * * Render theme_boost_union/drawers instead of theme_boost/drawers template
- * * Include course related hints
- * * Include back to top button
  *
  * @package   theme_boost_union
  * @copyright 2022 Luca Bösch, BFH Bern University of Applied Sciences luca.boesch@bfh.ch
@@ -39,10 +34,15 @@ require_once($CFG->dirroot . '/course/lib.php');
 // Require own locallib.php.
 require_once($CFG->dirroot . '/theme/boost_union/locallib.php');
 
-global $PAGE;
-
 // Add block button in editing mode.
 $addblockbutton = $OUTPUT->addblockbutton();
+$topaddblockbutton = $OUTPUT->addblockbutton('outside-top');
+$bottomaddblockbutton = $OUTPUT->addblockbutton('outside-bottom');
+$leftaddblockbutton = $OUTPUT->addblockbutton('outside-left');
+$rightaddblockbutton = $OUTPUT->addblockbutton('outside-right');
+$fotterleftaddblockbutton = $OUTPUT->addblockbutton('footer-left');
+$footerrightaddblockbutton = $OUTPUT->addblockbutton('footer-right');
+$footercenteraddblockbutton = $OUTPUT->addblockbutton('footer-center');
 
 user_preference_allow_ajax_update('drawer-open-index', PARAM_BOOL);
 user_preference_allow_ajax_update('drawer-open-block', PARAM_BOOL);
@@ -98,59 +98,54 @@ $regionmainsettingsmenu = $buildregionmainsettings ? $OUTPUT->region_main_settin
 
 $header = $PAGE->activityheader;
 $headercontent = $header->export_for_template($renderer);
-$mainregionclass = '';
-if (($PAGE->pagelayout == 'frontpage') || ($PAGE->pagelayout == 'course')) {
 
-    $mainregionclass = 'main-region-block';
-    $regions = [
-        'left' => 'outside-left',
-        'right' => 'outside-right',
-        'top' => 'outside-top',
-        'headertop' => 'header-top',
-        'bottom' => 'outside-bottom',
-        'footerleft' => 'footer-left',
-        'footerright' => 'footer-right',
-        'footercenter' => 'footer-center',
-        'offcanvas' => 'off-canvas'
+$regions = [
+    'left' => 'outside-left',
+    'right' => 'outside-right',
+    'top' => 'outside-top',
+    'bottom' => 'outside-bottom',
+    'footerleft' => 'footer-left',
+    'footerright' => 'footer-right',
+    'footercenter' => 'footer-center',
+    'offcanvas' => 'off-canvas'
+];
+$regionsdata = [];
+foreach ($regions as $name => $region) {
+
+    if (!has_capability('theme/boost_union:viewregion'.$name, $PAGE->context)) {
+        $regionsdata[$name] = ['hasblocks' => false];
+        continue;
+    }
+    $regionhtml = $OUTPUT->blocks($region);
+    $blockbutton = (has_capability('theme/boost_union:editregion'.$name, $PAGE->context)) ? $OUTPUT->addblockbutton($region) : '';
+    $regionsdata[$name] = [
+        'hasblocks' => (strpos($regionhtml, 'data-block=') !== false || !empty($blockbutton)),
+        'regionhtml' => $regionhtml,
+        'addblockbutton' => $blockbutton
     ];
-    $regionsdata = [];
-    foreach ($regions as $name => $region) {
-
-        if (!has_capability('theme/boost_union:viewregion'.$name, $PAGE->context)) {
-            $regionsdata[$name] = ['hasblocks' => false];
-            continue;
-        }
-
-        $regionhtml = $OUTPUT->blocks($region);
-        $blockbutton = (has_capability('theme/boost_union:editregion'.$name, $PAGE->context)) ?
-                         $OUTPUT->addblockbutton($region) : '';
-        $regionsdata[$name] = [
-            'hasblocks' => (strpos($regionhtml, 'data-block=') !== false || !empty($blockbutton)),
-            'regionhtml' => $regionhtml,
-            'addblockbutton' => $blockbutton
-        ];
-    }
-
-    if ((!empty($regionsdata['left']['hasblocks'])) && (!empty($regionsdata['right']['hasblocks']))) {
-        $regionclass = 'main-content-region-block';
-    } else if (!empty($regionsdata['left']['hasblocks'])) {
-        $regionclass = 'main-content-left-region';
-    } else if (!empty($regionsdata['right']['hasblocks'])) {
-        $regionclass = 'main-content-right-region';
-    }
-
-    $footercount = $regionsdata['footerleft']['hasblocks'];
-    $footercount += $regionsdata['footerright']['hasblocks'];
-    $footercount += $regionsdata['footercenter']['hasblocks'];
-    
-    if ($footercount == 1) {
-        $footerclass = 'col-xl-12';
-    } else if ($footercount == 2) {
-        $footerclass = 'col-xl-6';
-    } else if ($footercount == 3) {
-        $footerclass = 'col-xl-4';
-    }
 }
+
+if ((!empty($regionsdata['left']['hasblocks'])) && (!empty($regionsdata['right']['hasblocks']))) {
+    $regionclass = 'main-content-region-block';
+    $mainregionclass = 'main-region-block';
+} else if (!empty($regionsdata['left']['hasblocks'])) {
+    $regionclass = 'main-content-left-region';
+} else if (!empty($regionsdata['right']['hasblocks'])) {
+    $regionclass = 'main-content-right-region';
+}
+
+$footercount = $regionsdata['footerleft']['hasblocks'];
+$footercount += $regionsdata['footerright']['hasblocks'];
+$footercount += $regionsdata['footercenter']['hasblocks'];
+
+if ($footercount == 1) {
+    $footerclass = 'col-xl-12';
+} else if ($footercount == 2) {
+    $footerclass = 'col-xl-6';
+} else if ($footercount == 3) {
+    $footerclass = 'col-xl-4';
+}
+
 
 $templatecontext = [
     'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]),
@@ -174,9 +169,10 @@ $templatecontext = [
     'addblockbutton' => $addblockbutton,
     'regionclass' => isset($regionclass) ? $regionclass : '',
     'regionplacement' => get_config('theme_boost_union', 'regionplacement') == 0 ? 'blocks-next-maincontent' : 'blocks-near-window',
-    'mainregionclass' => $mainregionclass,
+    'mainregionclass' => isset($mainregionclass) ? $mainregionclass : '',
     'footerclass' => isset($footerclass) ? $footerclass : ''
 ];
+// Additional block regions.
 $templatecontext['regions'] = (isset($regionsdata)) ? $regionsdata : [];
 // Get and use the course related hints HTML code, if any hints are configured.
 $courserelatedhintshtml = theme_boost_union_get_course_related_hints();
@@ -190,9 +186,6 @@ require_once(__DIR__ . '/includes/courserelatedhints.php');
 // Include the content for the back to top button.
 require_once(__DIR__ . '/includes/backtotopbutton.php');
 
-// Include the content for the scrollspy.
-require_once(__DIR__ . '/includes/scrollspy.php');
-
 // Include the template content for the footnote.
 require_once(__DIR__ . '/includes/footnote.php');
 
@@ -205,5 +198,6 @@ require_once(__DIR__ . '/includes/javascriptdisabledhint.php');
 // Include the template content for the info banners.
 require_once(__DIR__ . '/includes/infobanners.php');
 
+
 // Render drawers.mustache from boost_union.
-echo $OUTPUT->render_from_template('theme_boost_union/drawers', $templatecontext);
+echo $OUTPUT->render_from_template('theme_boost_union/mydashboard', $templatecontext);

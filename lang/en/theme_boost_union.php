@@ -109,7 +109,6 @@ $string['backtotopbuttonsetting_desc'] = 'With this setting a back to top button
 $string['scrollspy'] = 'Scroll-spy';
 $string['scrollspysetting'] = 'Scroll-spy';
 $string['scrollspysetting_desc'] = 'With this setting, upon toggling edit mode on and off, the scroll position at where the user was when performing the toggle is preserved.';
-
 // Settings: Blocks tab.
 $string['blockstab'] = 'Blocks';
 // ... Section: General blocks.
@@ -240,3 +239,51 @@ $string['privacy:metadata'] = 'The Boost Union theme does not store any personal
 $string['boost_union:configure'] = 'To be able to configure the theme as non-admin';
 $string['boost_union:viewhintcourseselfenrol'] = 'To be able to see a hint for unrestricted self enrolment in a visible course.';
 $string['boost_union:viewhintinhiddencourse'] = 'To be able to see a hint in a hidden course.';
+$string['boost_union:viewregionleft'] = 'To be able to see a left block region';
+$string['boost_union:viewregionright'] = 'To be able to see a right block region';
+$string['boost_union:viewregiontop'] = 'To be able to see a top block region';
+$string['boost_union:viewregionheadertop'] = 'To be able see to a headertop block region';
+$string['boost_union:viewregionbottom'] = 'To be able to see a bottom block region';
+$string['boost_union:viewregionfooterleft'] = 'To be able to see a footerleft block region';
+$string['boost_union:viewregionfooterright'] = 'To be able to see a footerright block region';
+$string['boost_union:viewregionfootercenter'] = 'To be able to see a footercenter block region';
+$string['boost_union:viewregionoffcanvas'] = 'To be able to see a offcanvas block region';
+$string['boost_union:editregionleft'] = 'To be able to edit a left block region';
+$string['boost_union:editregionright'] = 'To be able to edit a right block region';
+$string['boost_union:editregiontop'] = 'To be able to edit a top block region';
+$string['boost_union:editregionbottom'] = 'To be able to edit a bottom block region';
+$string['boost_union:editregionfooterleft'] = 'To be able to edit a footerleft block region';
+$string['boost_union:editregionfooterright'] = 'To be able to edit a footerright block region';
+$string['boost_union:editregionfootercenter'] = 'To be able to edit a footercenter block region';
+$string['boost_union:editregionheadertop'] = 'To be able to edit a headertop block region';
+$string['boost_union:editregionoffcanvas'] = 'To be able to edit a offcanvas block region';
+
+// Block regions.
+$string['region-outside-left'] = 'left';
+$string['region-outside-top'] = 'top';
+$string['region-outside-bottom'] = 'bottom';
+$string['region-outside-right'] = 'right';
+$string['region-footer-left'] = 'footer-left';
+$string['region-footer-right'] = 'footer-right';
+$string['region-footer-center'] = 'footer-center';
+$string['region-header-top'] = 'header-top';
+$string['region-off-canvas'] = 'offcanvas';
+
+// Settings: block region page.
+$string['configtitleblockregion'] = 'Block region';
+// Settings: Courses tab.
+$string['blockregiontab'] = 'Block region';
+
+// Left block region width.
+$string['leftregionwidth'] = 'Left block region width';
+$string['leftregionwidthdesc'] = 'With this setting,you can control the left block region width';
+
+// Right block region width.
+$string['rightregionwidth'] = 'Right block region width';
+$string['rightregionwidthdesc'] = 'With this setting,you can control the right block region width';
+$string['regionplacement'] = 'Region blocks placement in larger screens';
+$string['regionplacementdesc'] = '';
+$string['nextmaincontent'] = 'Display blocks next to the main content';
+$string['nearwindow'] = 'Display blocks near to the window';
+$string['closeoffcanvas'] = 'Close offcanvas drawer';
+$string['openoffcanvas'] = 'Open off-canvas section';
