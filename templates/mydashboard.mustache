@@ -102,7 +102,7 @@
     {{#regions.offcanvas.hasblocks}}
         {{< theme_boost/drawer }}
             {{$id}}theme_boost-drawers-offcanvas{{/id}}
-            {{$drawerclasses}}drawer drawer-right {{/drawerclasses}}
+            {{$drawerclasses}}drawer drawer-top {{/drawerclasses}}
             {{$drawercontent}}
                 <section class="block-region-offcanvas" id="offcanvasregion" aria-label="{{#str}}blocks{{/str}}">
                     {{{ regions.offcanvas.addblockbutton }}}
@@ -112,7 +112,7 @@
             {{/drawercontent}}
             {{$forceopen}}0{{/forceopen}}
             {{$drawerstate}}show-drawer-offcanvas{{/drawerstate}}
-            {{$tooltipplacement}}left{{/tooltipplacement}}
+            {{$tooltipplacement}}top{{/tooltipplacement}}
             {{$drawercloseonresize}}1{{/drawercloseonresize}}
             {{$closebuttontext}}{{#str}}closeoffcanvas, theme_boost_union{{/str}}{{/closebuttontext}}
         {{/ theme_boost/drawer}}

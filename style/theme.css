@@ -139,3 +139,34 @@ div#theme_boost-drawers-offcanvas .block-region-offcanvas {
     font-size: 20px;
     line-height: 30px;
 }
+
+/*off canvas*/
+div#theme_boost-drawers-offcanvas {
+    height: inherit;
+    min-height: 300px;
+    width: 100%;    
+    z-index: 1050;
+}
+div#theme_boost-drawers-offcanvas .block-region-offcanvas {
+    z-index: 1053;
+}
+
+div.drawer.drawer-top {
+    visibility: hidden;
+    top: calc(-315px + -10px);
+
+}
+
+div.drawer.drawer-top.show {
+    visibility: visible;
+    top: 0;
+}
+.drawer-top .drawerheader .icon {
+    background: #000000;
+    padding: 2px;
+    color: #ffffff;
+}
+.drawer-top .drawerheader {
+    justify-content: right;
+    padding-right: 10px;
+}

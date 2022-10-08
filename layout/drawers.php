@@ -142,7 +142,6 @@ if (($PAGE->pagelayout == 'frontpage') || ($PAGE->pagelayout == 'course')) {
     $footercount = $regionsdata['footerleft']['hasblocks'];
     $footercount += $regionsdata['footerright']['hasblocks'];
     $footercount += $regionsdata['footercenter']['hasblocks'];
-    
     if ($footercount == 1) {
         $footerclass = 'col-xl-12';
     } else if ($footercount == 2) {
