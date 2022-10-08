@@ -45,7 +45,7 @@ define(['jquery', 'theme_boost/drawers', 'core/modal'], function($, Drawers, Mod
 
     /**
      * Used this listener to hide the off canvas drawer from the page
-    */
+     */
     function initOffCanvasEventListeners() {
         document.addEventListener(Drawers.eventTypes.drawerShown, function(e) {
             if (e.target.id != 'theme_boost-drawers-offcanvas') {
