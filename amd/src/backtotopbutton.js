@@ -34,7 +34,6 @@ define(['jquery', 'core/str', 'core/notification'], function($, str, Notificatio
     function initBackToTop() {
         // Get the string backtotop from language file.
         let stringsPromise = str.get_string('backtotop', 'theme_boost_union');
-
         // If the string has arrived, add backtotop button to DOM and add scroll and click handlers.
         $.when(stringsPromise).then(function(string) {
             // Add a fontawesome icon after the footer as the back to top button.

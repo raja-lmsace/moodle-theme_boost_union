@@ -33,7 +33,6 @@ define(['jquery'], function($) {
         $('.themeboostunioninfobanner .close').on('click', function() {
             // As soon as the button was clicked, get the number of the info banner.
             var infobannerno = $(this).attr('data-infobanner-no');
-
             // And store the dismissing of the info banner as a user preference to persist this decision.
             M.util.set_user_preference('theme_boost_union_infobanner' + infobannerno + '_dismissed', true);
         });
