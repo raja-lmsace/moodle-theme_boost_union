@@ -247,7 +247,10 @@ $string['boost_union:viewregionbottom'] = 'To be able to see a bottom block regi
 $string['boost_union:viewregionfooterleft'] = 'To be able to see a footerleft block region';
 $string['boost_union:viewregionfooterright'] = 'To be able to see a footerright block region';
 $string['boost_union:viewregionfootercenter'] = 'To be able to see a footercenter block region';
-$string['boost_union:viewregionoffcanvas'] = 'To be able to see a offcanvas block region';
+$string['boost_union:viewregionoffcanvasleft'] = 'To be able to see a offcanvas left block region';
+$string['boost_union:viewregionoffcanvasright'] = 'To be able to see a offcanvas right block region';
+$string['boost_union:viewregionoffcanvascenter'] = 'To be able to see a offcanvas center block region';
+
 $string['boost_union:editregionleft'] = 'To be able to edit a left block region';
 $string['boost_union:editregionright'] = 'To be able to edit a right block region';
 $string['boost_union:editregiontop'] = 'To be able to edit a top block region';
@@ -256,7 +259,9 @@ $string['boost_union:editregionfooterleft'] = 'To be able to edit a footerleft b
 $string['boost_union:editregionfooterright'] = 'To be able to edit a footerright block region';
 $string['boost_union:editregionfootercenter'] = 'To be able to edit a footercenter block region';
 $string['boost_union:editregionheadertop'] = 'To be able to edit a headertop block region';
-$string['boost_union:editregionoffcanvas'] = 'To be able to edit a offcanvas block region';
+$string['boost_union:editregionoffcanvasleft'] = 'To be able to edit a offcanvas block left region';
+$string['boost_union:editregionoffcanvasright'] = 'To be able to edit a offcanvas block right region';
+$string['boost_union:editregionoffcanvascenter'] = 'To be able to edit a offcanvas center block region';
 
 // Block regions.
 $string['region-outside-left'] = 'left';
@@ -267,7 +272,9 @@ $string['region-footer-left'] = 'footer-left';
 $string['region-footer-right'] = 'footer-right';
 $string['region-footer-center'] = 'footer-center';
 $string['region-header-top'] = 'header-top';
-$string['region-off-canvas'] = 'offcanvas';
+$string['region-offcanvas-left'] = 'offcanvasleft';
+$string['region-offcanvas-right'] = 'offcanvasright';
+$string['region-offcanvas-center'] = 'offcanvascenter';
 
 // Settings: block region page.
 $string['configtitleblockregion'] = 'Block region';

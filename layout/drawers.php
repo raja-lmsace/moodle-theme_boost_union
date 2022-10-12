@@ -98,65 +98,14 @@ $regionmainsettingsmenu = $buildregionmainsettings ? $OUTPUT->region_main_settin
 
 $header = $PAGE->activityheader;
 $headercontent = $header->export_for_template($renderer);
-$mainregionclass = '';
-if (($PAGE->pagelayout == 'frontpage') || ($PAGE->pagelayout == 'course')) {
 
-    $mainregionclass = 'main-region-block';
-    $regions = [
-        'left' => 'outside-left',
-        'right' => 'outside-right',
-        'top' => 'outside-top',
-        'headertop' => 'header-top',
-        'bottom' => 'outside-bottom',
-        'footerleft' => 'footer-left',
-        'footerright' => 'footer-right',
-        'footercenter' => 'footer-center',
-        'offcanvas' => 'off-canvas'
-    ];
-    $regionsdata = [];
-    foreach ($regions as $name => $region) {
-
-        if (!has_capability('theme/boost_union:viewregion'.$name, $PAGE->context)) {
-            $regionsdata[$name] = ['hasblocks' => false];
-            continue;
-        }
-
-        $regionhtml = $OUTPUT->blocks($region);
-        $blockbutton = (has_capability('theme/boost_union:editregion'.$name, $PAGE->context)) ?
-                         $OUTPUT->addblockbutton($region) : '';
-        $regionsdata[$name] = [
-            'hasblocks' => (strpos($regionhtml, 'data-block=') !== false || !empty($blockbutton)),
-            'regionhtml' => $regionhtml,
-            'addblockbutton' => $blockbutton
-        ];
-    }
-
-    if ((!empty($regionsdata['left']['hasblocks'])) && (!empty($regionsdata['right']['hasblocks']))) {
-        $regionclass = 'main-content-region-block';
-    } else if (!empty($regionsdata['left']['hasblocks'])) {
-        $regionclass = 'main-content-left-region';
-    } else if (!empty($regionsdata['right']['hasblocks'])) {
-        $regionclass = 'main-content-right-region';
-    }
-
-    $footercount = $regionsdata['footerleft']['hasblocks'];
-    $footercount += $regionsdata['footerright']['hasblocks'];
-    $footercount += $regionsdata['footercenter']['hasblocks'];
-    
-    if ($footercount == 1) {
-        $footerclass = 'col-xl-12';
-    } else if ($footercount == 2) {
-        $footerclass = 'col-xl-6';
-    } else if ($footercount == 3) {
-        $footerclass = 'col-xl-4';
-    }
-}
 
 $templatecontext = [
     'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]),
     'output' => $OUTPUT,
     'sidepreblocks' => $blockshtml,
     'hasblocks' => $hasblocks,
+    'user_is_editing' => $OUTPUT->page->user_is_editing(),
     'bodyattributes' => $bodyattributes,
     'courseindexopen' => $courseindexopen,
     'blockdraweropen' => $blockdraweropen,
@@ -172,18 +121,17 @@ $templatecontext = [
     'overflow' => $overflow,
     'headercontent' => $headercontent,
     'addblockbutton' => $addblockbutton,
-    'regionclass' => isset($regionclass) ? $regionclass : '',
-    'regionplacement' => get_config('theme_boost_union', 'regionplacement') == 0 ? 'blocks-next-maincontent' : 'blocks-near-window',
-    'mainregionclass' => $mainregionclass,
-    'footerclass' => isset($footerclass) ? $footerclass : ''
+    'regionplacement' => get_config('theme_boost_union', 'regionplacement') == 0 ?
+            'blocks-next-maincontent' : 'blocks-near-window',
 ];
-$templatecontext['regions'] = (isset($regionsdata)) ? $regionsdata : [];
+
 // Get and use the course related hints HTML code, if any hints are configured.
 $courserelatedhintshtml = theme_boost_union_get_course_related_hints();
 if ($courserelatedhintshtml) {
     $templatecontext['courserelatedhints'] = $courserelatedhintshtml;
 }
-
+// Includes Addtional Block regions.
+require_once(__DIR__ . '/includes/blockregions.php');
 // Include the template content for the course related hints.
 require_once(__DIR__ . '/includes/courserelatedhints.php');
 

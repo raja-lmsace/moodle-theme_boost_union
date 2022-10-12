@@ -73,8 +73,31 @@ $capabilities = array(
             'manager' => CAP_ALLOW
         ),
     ),
-    // Ability to see a offcanvas block region.
-    'theme/boost_union:viewregionoffcanvas' => array(
+    // Ability to see a offcanvas left block region.
+    'theme/boost_union:viewregionoffcanvasleft' => array(
+        'captype' => 'read',
+        'contextlevel' => CONTEXT_COURSE,
+        'archetypes' => array(
+            'user' => CAP_ALLOW,
+            'teacher' => CAP_ALLOW,
+            'editingteacher' => CAP_ALLOW,
+            'manager' => CAP_ALLOW
+        ),
+    ),
+
+    // Ability to see a offcanvas right block region.
+    'theme/boost_union:viewregionoffcanvasright' => array(
+        'captype' => 'read',
+        'contextlevel' => CONTEXT_COURSE,
+        'archetypes' => array(
+            'user' => CAP_ALLOW,
+            'teacher' => CAP_ALLOW,
+            'editingteacher' => CAP_ALLOW,
+            'manager' => CAP_ALLOW
+        ),
+    ),
+     // Ability to see a offcanvas center block region.
+    'theme/boost_union:viewregionoffcanvascenter' => array(
         'captype' => 'read',
         'contextlevel' => CONTEXT_COURSE,
         'archetypes' => array(
@@ -214,8 +237,28 @@ $capabilities = array(
             'manager' => CAP_ALLOW
         ),
     ),
-    // Ability to edit a offcanvas block region.
-    'theme/boost_union:editregionoffcanvas' => array(
+    // Ability to edit a offcanvas left block region.
+    'theme/boost_union:editregionoffcanvasleft' => array(
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_COURSE,
+        'archetypes' => array(
+            'teacher' => CAP_ALLOW,
+            'editingteacher' => CAP_ALLOW,
+            'manager' => CAP_ALLOW
+        ),
+    ),
+    // Ability to edit a offcanvas right block region.
+    'theme/boost_union:editregionoffcanvasright' => array(
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_COURSE,
+        'archetypes' => array(
+            'teacher' => CAP_ALLOW,
+            'editingteacher' => CAP_ALLOW,
+            'manager' => CAP_ALLOW
+        ),
+    ),
+    // Ability to edit a offcanvas center block region.
+    'theme/boost_union:editregionoffcanvascenter' => array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
         'archetypes' => array(

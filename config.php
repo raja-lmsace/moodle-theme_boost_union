@@ -62,73 +62,88 @@ $THEME->layouts = [
     // Standard layout with blocks.
     'standard' => array(
         'file' => 'drawers.php',
-        'regions' => array('side-pre'),
+        'regions' => array(
+            'side-pre', 'offcanvas-left', 'offcanvas-right', 'offcanvas-center'
+        ),
         'defaultregion' => 'side-pre',
     ),
     // Main course page.
     'course' => array(
         'file' => 'drawers.php',
-        'regions' => array('side-pre', 'header-top',
-                        'outside-left', 'outside-top',
-                        'outside-bottom', 'outside-right',
-                        'footer-left', 'footer-right', 'footer-center',
-                        'off-canvas'
-                    ),
+        'regions' => array(
+            'side-pre', 'header-top',
+            'outside-left', 'outside-top',
+            'outside-bottom', 'outside-right',
+            'footer-left', 'footer-right', 'footer-center',
+            'offcanvas-left', 'offcanvas-right', 'offcanvas-center'
+        ),
         'defaultregion' => 'side-pre',
         'options' => array('langmenu' => true),
     ),
     'coursecategory' => array(
         'file' => 'drawers.php',
-        'regions' => array('side-pre'),
+        'regions' => array(
+            'side-pre', 'offcanvas-left', 'offcanvas-right', 'offcanvas-center'
+        ),
         'defaultregion' => 'side-pre',
     ),
     // Part of course, typical for modules - default page layout if $cm specified in require_login().
     'incourse' => array(
         'file' => 'drawers.php',
-        'regions' => array('side-pre'),
+        'regions' => array(
+            'side-pre', 'offcanvas-left', 'offcanvas-right', 'offcanvas-center'
+        ),
         'defaultregion' => 'side-pre',
     ),
     // The site home page.
     'frontpage' => array(
         'file' => 'drawers.php',
-        'regions' => array('side-pre', 'header-top',
-                        'outside-left', 'outside-top',
-                        'outside-bottom', 'outside-right',
-                        'footer-left', 'footer-right', 'footer-center',
-                        'off-canvas'
-                    ),
+        'regions' => array(
+            'side-pre', 'header-top',
+            'outside-left', 'outside-top',
+            'outside-bottom', 'outside-right',
+            'footer-left', 'footer-right', 'footer-center',
+            'offcanvas-left', 'offcanvas-right', 'offcanvas-center'
+        ),
         'defaultregion' => 'side-pre',
         'options' => array('nonavbar' => true),
     ),
     // Server administration scripts.
     'admin' => array(
         'file' => 'drawers.php',
-        'regions' => array('side-pre'),
+        'regions' => array(
+            'side-pre', 'offcanvas-left', 'offcanvas-right', 'offcanvas-center'
+        ),
         'defaultregion' => 'side-pre',
     ),
     // My courses page.
     'mycourses' => array(
         'file' => 'drawers.php',
-        'regions' => ['side-pre'],
+        'regions' => [
+            'side-pre', 'offcanvas-left', 'offcanvas-right', 'offcanvas-center'
+        ],
         'defaultregion' => 'side-pre',
         'options' => array('nonavbar' => true),
     ),
     // My dashboard page.
     'mydashboard' => array(
-        'file' => 'mydashboard.php',
-        'regions' => array('side-pre', 'outside-left',
-                        'outside-top', 'outside-bottom',
-                        'outside-right', 'footer-left',
-                        'footer-right', 'footer-center',
-                        'off-canvas'
-                     ),
+        'file' => 'drawers.php',
+        'regions' => array(
+            'side-pre', 'outside-left',
+            'outside-top', 'outside-bottom',
+            'outside-right', 'footer-left',
+            'footer-right', 'footer-center',
+            'offcanvas-left', 'offcanvas-right', 'offcanvas-center'
+        ),
         'defaultregion' => 'side-pre',
         'options' => array('nonavbar' => true, 'langmenu' => true),
     ),
     // My public page.
     'mypublic' => array(
         'file' => 'drawers.php',
-        'regions' => array('side-pre'),
+        'regions' => array(
+            'side-pre', 'offcanvas-left', 'offcanvas-right', 'offcanvas-center'
+        ),
         'defaultregion' => 'side-pre',
     ),
     'login' => array(
@@ -190,7 +205,9 @@ $THEME->layouts = [
     // The pagelayout used for reports.
     'report' => array(
         'file' => 'drawers.php',
-        'regions' => array('side-pre'),
+        'regions' => array(
+            'side-pre', 'offcanvas-left', 'offcanvas-right', 'offcanvas-center'
+        ),
         'defaultregion' => 'side-pre',
     ),
     // The pagelayout used for safebrowser and securewindow.

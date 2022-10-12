@@ -238,3 +238,31 @@ function theme_boost_union_blockregion($css, $theme) {
     $css = str_replace('[[rightregionwidth]]', $rightregionwidth, $css);
     return $css;
 }
+
+/**
+ * Define additional block regions.
+ *
+ * @param string $allregions If true returns all the available regions
+ * @param string $dashboard Remove the header-top region for dashboard.
+ * @return array $regions
+ */
+function theme_boost_union_additional_regions($allregions=true, $dashboard=false) {
+    $regions = [
+        'offcanvasleft' => 'offcanvas-left',
+        'offcanvasright' => 'offcanvas-right',
+        'offcanvascenter' => 'offcanvas-center'
+    ];
+
+    $regions += ($allregions) ? [
+        'left' => 'outside-left',
+        'right' => 'outside-right',
+        'top' => 'outside-top',
+        'bottom' => 'outside-bottom',
+        'footerleft' => 'footer-left',
+        'footerright' => 'footer-right',
+        'footercenter' => 'footer-center',
+    ] : [];
+
+    $regions += (!$dashboard) ? ['headertop' => 'header-top'] : [];
+    return $regions;
+}

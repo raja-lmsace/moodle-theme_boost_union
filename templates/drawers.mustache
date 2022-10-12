@@ -99,45 +99,47 @@
         {{/ theme_boost/drawer}}
     {{/hasblocks}}
 
+    {{^user_is_editing}}
     {{#regions.offcanvas.hasblocks}}
         {{< theme_boost/drawer }}
             {{$id}}theme_boost-drawers-offcanvas{{/id}}
-            {{$drawerclasses}}drawer drawer-right {{/drawerclasses}}
+            {{$drawerclasses}}drawer drawer-top {{/drawerclasses}}
             {{$drawercontent}}
-                <section class="block-region-offcanvas" id="offcanvasregion" aria-label="{{#str}}blocks{{/str}}">
-                    {{{ regions.offcanvas.addblockbutton }}}
-                    {{{ regions.offcanvas.regionhtml }}} 
-                </section>
-
+                {{> theme_boost_union/offcanvas}}
             {{/drawercontent}}
             {{$forceopen}}0{{/forceopen}}
             {{$drawerstate}}show-drawer-offcanvas{{/drawerstate}}
-            {{$tooltipplacement}}left{{/tooltipplacement}}
+            {{$tooltipplacement}}top{{/tooltipplacement}}
             {{$drawercloseonresize}}1{{/drawercloseonresize}}
             {{$closebuttontext}}{{#str}}closeoffcanvas, theme_boost_union{{/str}}{{/closebuttontext}}
         {{/ theme_boost/drawer}}
     {{/regions.offcanvas.hasblocks}}
-
+    {{/user_is_editing}}
+    
     <div id="page" data-region="mainpage" data-usertour="scroller" 
         class="drawers {{#courseindexopen}}show-drawer-left{{/courseindexopen}} 
         {{#blockdraweropen}}show-drawer-right{{/blockdraweropen}} drag-container
         {{{regionplacement}}}
         ">
+        {{# user_is_editing}}
+        {{> theme_boost_union/offcanvas}}
+        {{/user_is_editing}}
+
         {{#regions.top.hasblocks}}
-            <section class="block-region-top" id="topregion" aria-label="{{#str}}blocks{{/str}}">
+            <section class="theme-block-region block-region-top" id="topregion" aria-label="{{#str}}blocks{{/str}}">
                     {{{ regions.top.addblockbutton }}}
                     {{{ regions.top.regionhtml }}} 
             </section>
         {{/regions.top.hasblocks}}
         
         {{#regions.headertop.hasblocks}}
-            <section class="block-region-headertop" id="headertopregion" aria-label="{{#str}}blocks{{/str}}">        
+            <section class="theme-block-region block-region-headertop" id="headertopregion" aria-label="{{#str}}blocks{{/str}}">        
                 {{{ regions.headertop.addblockbutton }}}
                 {{{ regions.headertop.regionhtml }}} 
             </section>
         {{/regions.headertop.hasblocks}}
 
-        <div class="{{mainregionclass}}">
+        <div class="main-content-region {{mainregionclass}}">
             {{#regions.left.hasblocks}}
                 <section data-region="blocks-column" class=" {{#regions.left.hasblocks}}pre-side-block block-region-left{{/regions.left.hasblocks}}" id="leftblock" aria-label="{{#str}}blocks{{/str}}">
                     {{{ regions.left.addblockbutton }}}
@@ -232,7 +234,7 @@
         </div>
 
         {{#regions.bottom.hasblocks}}
-            <section class="block-region-bottom" id="bottomregion" aria-label="{{#str}}blocks{{/str}}">
+            <section class="theme-block-region block-region-bottom" id="bottomregion" aria-label="{{#str}}blocks{{/str}}">
                 {{{ regions.bottom.addblockbutton }}}
                 {{{ regions.bottom.regionhtml }}} 
             </section>
@@ -241,7 +243,7 @@
             <div class="row">
                  {{#regions.footerleft.hasblocks}}
                     <div class="{{footerclass}}">   
-                        <section class="block-region-footer-left" id="footerleft" aria-label="{{#str}}blocks{{/str}}">
+                        <section class="theme-block-region block-region-footer-left" id="footerleft" aria-label="{{#str}}blocks{{/str}}">
                             {{{ regions.footerleft.addblockbutton }}}
                             {{{ regions.footerleft.regionhtml }}} 
                         </section>
@@ -249,7 +251,7 @@
                 {{/regions.footerleft.hasblocks}}
                 {{#regions.footercenter.hasblocks}}
                     <div class="{{footerclass}}">   
-                        <section class="block-region-footer-center" id="footercenter" aria-label="{{#str}}blocks{{/str}}">
+                        <section class="theme-block-region block-region-footer-center" id="footercenter" aria-label="{{#str}}blocks{{/str}}">
                             {{{ regions.footercenter.addblockbutton }}}
                             {{{ regions.footercenter.regionhtml }}} 
                         </section>
@@ -257,7 +259,7 @@
                 {{/regions.footercenter.hasblocks}}
                 {{#regions.footerright.hasblocks}}
                     <div class="{{footerclass}}">
-                        <section class="block-region-footer-right" id="footerright" aria-label="{{#str}}blocks{{/str}}">
+                        <section class="theme-block-region block-region-footer-right" id="footerright" aria-label="{{#str}}blocks{{/str}}">
                             {{{ regions.footerright.addblockbutton }}}
                             {{{ regions.footerright.regionhtml }}}
                         </section>
