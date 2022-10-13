@@ -82,6 +82,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
 
         $context->hascontrols = !empty($bc->controls);
 
+        // Hide edit control options for the regions based on the capabilities.
         $regions = theme_boost_union_additional_regions();
         $regioncapname = array_search($region, $regions);
         if (!empty($regioncapname) && $context->hascontrols) {

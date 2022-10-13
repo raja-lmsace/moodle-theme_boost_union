@@ -242,11 +242,10 @@ function theme_boost_union_blockregion($css, $theme) {
 /**
  * Define additional block regions.
  *
- * @param string $allregions If true returns all the available regions
- * @param string $dashboard Remove the header-top region for dashboard.
+ * @param array $pageregions List of page regions.
  * @return array $regions
  */
-function theme_boost_union_additional_regions($allregions=true, $dashboard=false) {
+function theme_boost_union_additional_regions($pageregions=[]) {
     $regions = [
         'top' => 'outside-top',
         'footerleft' => 'footer-left',
@@ -254,15 +253,12 @@ function theme_boost_union_additional_regions($allregions=true, $dashboard=false
         'footercenter' => 'footer-center',
         'offcanvasleft' => 'offcanvas-left',
         'offcanvasright' => 'offcanvas-right',
-        'offcanvascenter' => 'offcanvas-center'
-    ];
-
-    $regions += ($allregions) ? [
+        'offcanvascenter' => 'offcanvas-center',
         'left' => 'outside-left',
         'right' => 'outside-right',
         'bottom' => 'outside-bottom',
-    ] : [];
+        'headertop' => 'header-top'
+    ];
 
-    $regions += (!$dashboard) ? ['headertop' => 'header-top'] : [];
-    return $regions;
+    return ($pageregions) ? array_intersect($regions, $pageregions) : $regions;
 }

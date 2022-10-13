@@ -46,18 +46,8 @@ class additionalregions {
     public function __construct() {
         global $PAGE;
         $this->page = $PAGE;
-        $isdashboard = ($PAGE->pagelayout == 'mydashboard');
-        $this->regions = ($this->is_page_supports()) ?
-                theme_boost_union_additional_regions(true, $isdashboard) : theme_boost_union_additional_regions(false, true);
-    }
-
-    /**
-     * Check the current page layout supports additional regions.
-     * @return bool
-     */
-    public function is_page_supports() {
-        $supportlayout = ['course', 'frontpage', 'mydashboard'];
-        return (in_array($this->page->pagelayout, $supportlayout));
+        $pageregions = $this->page->blocks->get_regions();
+        $this->regions = theme_boost_union_additional_regions($pageregions);
     }
 
     /**
