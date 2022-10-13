@@ -63,7 +63,8 @@ $THEME->layouts = [
     'standard' => array(
         'file' => 'drawers.php',
         'regions' => array(
-            'side-pre', 'offcanvas-left', 'offcanvas-right', 'offcanvas-center'
+            'side-pre', 'outside-top', 'footer-left', 'footer-right',
+            'footer-center', 'offcanvas-left', 'offcanvas-right', 'offcanvas-center'
         ),
         'defaultregion' => 'side-pre',
     ),
@@ -83,7 +84,8 @@ $THEME->layouts = [
     'coursecategory' => array(
         'file' => 'drawers.php',
         'regions' => array(
-            'side-pre', 'offcanvas-left', 'offcanvas-right', 'offcanvas-center'
+            'side-pre', 'outside-top', 'footer-left', 'footer-right',
+            'footer-center', 'offcanvas-left', 'offcanvas-right', 'offcanvas-center'
         ),
         'defaultregion' => 'side-pre',
     ),
@@ -91,7 +93,8 @@ $THEME->layouts = [
     'incourse' => array(
         'file' => 'drawers.php',
         'regions' => array(
-            'side-pre', 'offcanvas-left', 'offcanvas-right', 'offcanvas-center'
+            'side-pre', 'outside-top', 'footer-left', 'footer-right',
+            'footer-center', 'offcanvas-left', 'offcanvas-right', 'offcanvas-center'
         ),
         'defaultregion' => 'side-pre',
     ),
@@ -112,7 +115,8 @@ $THEME->layouts = [
     'admin' => array(
         'file' => 'drawers.php',
         'regions' => array(
-            'side-pre', 'offcanvas-left', 'offcanvas-right', 'offcanvas-center'
+            'side-pre', 'outside-top', 'footer-left', 'footer-right', 'footer-center',
+            'offcanvas-left', 'offcanvas-right', 'offcanvas-center'
         ),
         'defaultregion' => 'side-pre',
     ),
@@ -120,7 +124,8 @@ $THEME->layouts = [
     'mycourses' => array(
         'file' => 'drawers.php',
         'regions' => [
-            'side-pre', 'offcanvas-left', 'offcanvas-right', 'offcanvas-center'
+            'side-pre', 'outside-top', 'footer-left', 'footer-right', 'footer-center',
+            'offcanvas-left', 'offcanvas-right', 'offcanvas-center'
         ],
         'defaultregion' => 'side-pre',
         'options' => array('nonavbar' => true),
@@ -142,7 +147,8 @@ $THEME->layouts = [
     'mypublic' => array(
         'file' => 'drawers.php',
         'regions' => array(
-            'side-pre', 'offcanvas-left', 'offcanvas-right', 'offcanvas-center'
+            'side-pre', 'outside-top', 'footer-left', 'footer-right',
+             'footer-center', 'offcanvas-left', 'offcanvas-right', 'offcanvas-center'
         ),
         'defaultregion' => 'side-pre',
     ),
@@ -206,7 +212,8 @@ $THEME->layouts = [
     'report' => array(
         'file' => 'drawers.php',
         'regions' => array(
-            'side-pre', 'offcanvas-left', 'offcanvas-right', 'offcanvas-center'
+            'side-pre', 'outside-top', 'footer-left', 'footer-right',
+            'footer-center', 'offcanvas-left', 'offcanvas-right', 'offcanvas-center'
         ),
         'defaultregion' => 'side-pre',
     ),

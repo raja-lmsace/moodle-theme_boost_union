@@ -248,6 +248,10 @@ function theme_boost_union_blockregion($css, $theme) {
  */
 function theme_boost_union_additional_regions($allregions=true, $dashboard=false) {
     $regions = [
+        'top' => 'outside-top',
+        'footerleft' => 'footer-left',
+        'footerright' => 'footer-right',
+        'footercenter' => 'footer-center',
         'offcanvasleft' => 'offcanvas-left',
         'offcanvasright' => 'offcanvas-right',
         'offcanvascenter' => 'offcanvas-center'
@@ -256,11 +260,7 @@ function theme_boost_union_additional_regions($allregions=true, $dashboard=false
     $regions += ($allregions) ? [
         'left' => 'outside-left',
         'right' => 'outside-right',
-        'top' => 'outside-top',
         'bottom' => 'outside-bottom',
-        'footerleft' => 'footer-left',
-        'footerright' => 'footer-right',
-        'footercenter' => 'footer-center',
     ] : [];
 
     $regions += (!$dashboard) ? ['headertop' => 'header-top'] : [];
