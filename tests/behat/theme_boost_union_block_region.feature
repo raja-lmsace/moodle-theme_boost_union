@@ -479,64 +479,70 @@ Feature: Theme boost union block config
   Scenario: Add a block to a offcanvas region.
     And I navigate to "Appearance > Default Dashboard page" in site administration
     And I turn editing mode on
-    And I click on "#usernavigation .drawer-offcanvas-toggle" "css_element"
-    And I should see "Add a block" in the ".block-region-offcanvas#offcanvasregion" "css_element"
-    Then I click on "Add a block" "link" in the ".block-region-offcanvas#offcanvasregion" "css_element"
+    #And I click on "#usernavigation .drawer-offcanvas-toggle" "css_element"
+    And I should see "Add a block" in the ".block-region-offcanvasleft#offcanvasregionleft" "css_element"
+    Then I click on "Add a block" "link" in the ".block-region-offcanvasleft#offcanvasregionleft" "css_element"
     Then I should see "Online users"
     Then I click on "Online users" "link"
     And I press "Reset Dashboard for all users"
     And I should see "All Dashboard pages have been reset to default."
     Then I press "Continue"
+    And I turn editing mode off
     And I click on "#usernavigation .drawer-offcanvas-toggle" "css_element"
-    Then I should see "Online users" in the ".block-region-offcanvas#offcanvasregion" "css_element"
+    Then I should see "Online users" in the ".block-region-offcanvasleft#offcanvasregionleft" "css_element"
     And I am on site homepage
-    And I click on "#usernavigation .drawer-offcanvas-toggle" "css_element"
-    And I should see "Add a block" in the ".block-region-offcanvas#offcanvasregion" "css_element"
-    Then I click on "Add a block" "link" in the ".block-region-offcanvas#offcanvasregion" "css_element"
+    And I turn editing mode on
+    #And I click on "#usernavigation .drawer-offcanvas-toggle" "css_element"
+    And I should see "Add a block" in the ".block-region-offcanvasleft#offcanvasregionleft" "css_element"
+    Then I click on "Add a block" "link" in the ".block-region-offcanvasleft#offcanvasregionleft" "css_element"
     And I should see "Calendar" in the ".modal-body" "css_element"
     Then I click on "Calendar" "link" in the ".modal-body" "css_element"
+    And I turn editing mode off
     And I click on "#usernavigation .drawer-offcanvas-toggle" "css_element"
-    Then I should see "Calendar" in the ".block-region-offcanvas#offcanvasregion" "css_element"
+    Then I should see "Calendar" in the ".block-region-offcanvasleft#offcanvasregionleft" "css_element"
     And I am on "Course 1" course homepage
-    And I click on "#usernavigation .drawer-offcanvas-toggle" "css_element"
-    And I should see "Add a block" in the ".block-region-offcanvas#offcanvasregion" "css_element"
-    Then I click on "Add a block" "link" in the ".block-region-offcanvas#offcanvasregion" "css_element"
+    And I turn editing mode on
+    #And I click on "#usernavigation .drawer-offcanvas-toggle" "css_element"
+    And I should see "Add a block" in the ".block-region-offcanvasleft#offcanvasregionleft" "css_element"
+    Then I click on "Add a block" "link" in the ".block-region-offcanvasleft#offcanvasregionleft" "css_element"
     Then I should see "Activities"
     Then I click on "Activities" "link"
+    And I turn editing mode off
     And I click on "#usernavigation .drawer-offcanvas-toggle" "css_element"
-    Then I should see "Activities" in the ".block-region-offcanvas#offcanvasregion" "css_element"
+    Then I should see "Activities" in the ".block-region-offcanvasleft#offcanvasregionleft" "css_element"
     And I am on site homepage
     And I navigate to "Users > Permissions > Define roles" in site administration
     And I follow "Authenticated user"
     And I press "Edit"
-    And I click on "theme/boost_union:editregionoffcanvas" "checkbox"
+    And I click on "theme/boost_union:editregionoffcanvasleft" "checkbox"
     And I press "Save changes"
     And I log in as "student1"
     Then I follow "Dashboard"
     And I click on "#usernavigation .drawer-offcanvas-toggle" "css_element"
-    Then I should see "Online users" in the ".block-region-offcanvas#offcanvasregion" "css_element"
+    Then I should see "Online users" in the ".block-region-offcanvasleft#offcanvasregionleft" "css_element"
     And I am on site homepage
     Then I follow "Dashboard"
     And I turn editing mode on
-    And I click on "#usernavigation .drawer-offcanvas-toggle" "css_element"
-    And I should see "Add a block" in the ".block-region-offcanvas#offcanvasregion" "css_element"
-    Then I click on "Add a block" "link" in the ".block-region-offcanvas#offcanvasregion" "css_element"
+    #And I click on "#usernavigation .drawer-offcanvas-toggle" "css_element"
+    And I should see "Add a block" in the ".block-region-offcanvasleft#offcanvasregionleft" "css_element"
+    Then I click on "Add a block" "link" in the ".block-region-offcanvasleft#offcanvasregionleft" "css_element"
     Then I should see "Logged in user"
     And I click on "Logged in user" "link"
+    And I turn editing mode off
     And I click on "#usernavigation .drawer-offcanvas-toggle" "css_element"
-    Then I should see "Logged in user" in the ".block-region-offcanvas#offcanvasregion" "css_element"
+    Then I should see "Logged in user" in the ".block-region-offcanvasleft#offcanvasregionleft" "css_element"
     And I am on site homepage
     And I click on "#usernavigation .drawer-offcanvas-toggle" "css_element"
-    Then I should see "Calendar" in the ".block-region-offcanvas#offcanvasregion" "css_element"
+    Then I should see "Calendar" in the ".block-region-offcanvasleft#offcanvasregionleft" "css_element"
     And I am on "Course 1" course homepage
     And I click on "#usernavigation .drawer-offcanvas-toggle" "css_element"
-    Then I should see "Activities" in the ".block-region-offcanvas#offcanvasregion" "css_element"
+    Then I should see "Activities" in the ".block-region-offcanvasleft#offcanvasregionleft" "css_element"
     And I am on site homepage
     And I log in as "admin"
     And I navigate to "Users > Permissions > Define roles" in site administration
     And I follow "Authenticated user"
     And I press "Edit"
-    And I click on "theme/boost_union:viewregionoffcanvas" "checkbox"
+    And I click on "theme/boost_union:viewregionoffcanvasleft" "checkbox"
     And I press "Save changes"
     And I log in as "student1"
     Then I follow "Dashboard"
