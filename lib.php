@@ -18,7 +18,7 @@
  * Theme Boost Union - Library
  *
  * @package    theme_boost_union
- * @copyright  2022 Moodle an Hochschulen e.V. <kontakt@moodle-an-hochschulen.de>
+ * @copyright  2022 Alexander Bias, lern.link GmbH <alexander.bias@lernlink.de>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -26,10 +26,15 @@
 define('THEME_BOOST_UNION_SETTING_SELECT_YES', 'yes');
 define('THEME_BOOST_UNION_SETTING_SELECT_NO', 'no');
 
-define('THEME_BOOST_UNION_SETTING_IMPRINTLINKPOSITION_NONE', 'none');
-define('THEME_BOOST_UNION_SETTING_IMPRINTLINKPOSITION_FOOTNOTE', 'footnote');
-define('THEME_BOOST_UNION_SETTING_IMPRINTLINKPOSITION_FOOTER', 'footer');
-define('THEME_BOOST_UNION_SETTING_IMPRINTLINKPOSITION_BOTH', 'both');
+define('THEME_BOOST_UNION_SETTING_STATICPAGELINKPOSITION_NONE', 'none');
+define('THEME_BOOST_UNION_SETTING_STATICPAGELINKPOSITION_FOOTNOTE', 'footnote');
+define('THEME_BOOST_UNION_SETTING_STATICPAGELINKPOSITION_FOOTER', 'footer');
+define('THEME_BOOST_UNION_SETTING_STATICPAGELINKPOSITION_BOTH', 'both');
+
+define('THEME_BOOST_UNION_SETTING_HIDENODESPRIMARYNAVIGATION_HOME', 'home');
+define('THEME_BOOST_UNION_SETTING_HIDENODESPRIMARYNAVIGATION_MYHOME', 'myhome');
+define('THEME_BOOST_UNION_SETTING_HIDENODESPRIMARYNAVIGATION_MYCOURSES', 'courses');
+define('THEME_BOOST_UNION_SETTING_HIDENODESPRIMARYNAVIGATION_SITEADMIN', 'siteadmin');
 
 define('THEME_BOOST_UNION_SETTING_INFOBANNER_COUNT', 5);
 define('THEME_BOOST_UNION_SETTING_INFOBANNERPAGES_MY', 'mydashboard');
@@ -40,6 +45,44 @@ define('THEME_BOOST_UNION_SETTING_INFOBANNERPAGES_LOGIN', 'login');
 define('THEME_BOOST_UNION_SETTING_INFOBANNERMODE_PERPETUAL', 'perp');
 define('THEME_BOOST_UNION_SETTING_INFOBANNERMODE_TIMEBASED', 'time');
 
+define('THEME_BOOST_UNION_SETTING_ADVERTISEMENTTILES_COUNT', 12);
+define('THEME_BOOST_UNION_SETTING_ADVERTISEMENTTILES_COLUMN_COUNT', 4);
+define('THEME_BOOST_UNION_SETTING_ADVERTISEMENTTILES_FRONTPAGEPOSITION_BEFORE', 1);
+define('THEME_BOOST_UNION_SETTING_ADVERTISEMENTTILES_FRONTPAGEPOSITION_AFTER', 2);
+
+define('THEME_BOOST_UNION_SETTING_FAVERSION_NONE', 'none');
+define('THEME_BOOST_UNION_SETTING_FAVERSION_FA6FREE', 'fa6free');
+define('THEME_BOOST_UNION_SETTING_FAFILES_MANDATORY', 'm');
+define('THEME_BOOST_UNION_SETTING_FAFILES_OPTIONAL', 'o');
+
+define('THEME_BOOST_UNION_SETTING_HEIGHT_100PX', '100px');
+define('THEME_BOOST_UNION_SETTING_HEIGHT_150PX', '150px');
+define('THEME_BOOST_UNION_SETTING_HEIGHT_200PX', '200px');
+define('THEME_BOOST_UNION_SETTING_HEIGHT_250PX', '250px');
+
+define('THEME_BOOST_UNION_SETTING_IMAGEPOSITION_CENTER_CENTER', 'center center');
+define('THEME_BOOST_UNION_SETTING_IMAGEPOSITION_CENTER_TOP', 'center top');
+define('THEME_BOOST_UNION_SETTING_IMAGEPOSITION_CENTER_BOTTOM', 'center bottom');
+define('THEME_BOOST_UNION_SETTING_IMAGEPOSITION_LEFT_TOP', 'left top');
+define('THEME_BOOST_UNION_SETTING_IMAGEPOSITION_LEFT_CENTER', 'left center');
+define('THEME_BOOST_UNION_SETTING_IMAGEPOSITION_LEFT_BOTTOM', 'left bottom');
+define('THEME_BOOST_UNION_SETTING_IMAGEPOSITION_RIGHT_TOP', 'right top');
+define('THEME_BOOST_UNION_SETTING_IMAGEPOSITION_RIGHT_CENTER', 'right center');
+define('THEME_BOOST_UNION_SETTING_IMAGEPOSITION_RIGHT_BOTTOM', 'right bottom');
+
+define('THEME_BOOST_UNION_SETTING_COURSEIMAGELAYOUT_STACKEDDARK', 'stackeddark');
+define('THEME_BOOST_UNION_SETTING_COURSEIMAGELAYOUT_STACKEDLIGHT', 'stackedlight');
+define('THEME_BOOST_UNION_SETTING_COURSEIMAGELAYOUT_HEADINGABOVE', 'headingabove');
+
+define('THEME_BOOST_UNION_SETTING_LINKTARGET_SAMEWINDOW', 'same');
+define('THEME_BOOST_UNION_SETTING_LINKTARGET_NEWTAB', 'new');
+
+define('THEME_BOOST_UNION_SETTING_LOGINFORMPOS_CENTER', 'center');
+define('THEME_BOOST_UNION_SETTING_LOGINFORMPOS_LEFT', 'left');
+define('THEME_BOOST_UNION_SETTING_LOGINFORMPOS_RIGHT', 'right');
+
+define('THEME_BOOST_UNION_SETTING_OUTSIDEREGIONSPLACEMENT_NEXTMAINCONTENT', 0);
+define('THEME_BOOST_UNION_SETTING_OUTSIDEREGIONSPLACEMENT_NEARWINDOW', 1);
 
 /**
  * Returns the main SCSS content.
@@ -64,6 +107,8 @@ function theme_boost_union_get_main_scss_content($theme) {
     }
     $scss .= file_get_contents($CFG->dirroot . '/theme/boost_union/scss/boost_union/post.scss');
 
+    $scss .= file_get_contents($CFG->dirroot . '/theme/boost_union/scss/boost_union/blockregion.scss');
+
     return $scss;
 }
 
@@ -75,6 +120,8 @@ function theme_boost_union_get_main_scss_content($theme) {
  */
 function theme_boost_union_get_pre_scss($theme) {
     global $CFG;
+    // Require local library.
+    require_once($CFG->dirroot . '/theme/boost_union/locallib.php');
 
     $scss = '';
 
@@ -89,6 +136,8 @@ function theme_boost_union_get_pre_scss($theme) {
         'bootstrapcolorinfo' => ['info'],
         'bootstrapcolorwarning' => ['warning'],
         'bootstrapcolordanger' => ['danger'],
+        'leftregionwidth' => ['leftregionwidthval'],
+        'rightregionwidth' => ['rightregionwidthval']
     ];
 
     // Prepend variables first.
@@ -106,6 +155,10 @@ function theme_boost_union_get_pre_scss($theme) {
     // Set variables which are influenced by the coursecontentmaxwidth setting.
     if (isset($theme->settings->coursecontentmaxwidth)) {
         $scss .= '$course-content-maxwidth: '.$theme->settings->coursecontentmaxwidth.";\n";
+    }
+    // Set variables which are influenced by the h5pcontentmaxwidth setting.
+    if (isset($theme->settings->h5pcontentmaxwidth)) {
+        $scss .= '$h5p-content-maxwidth: '.$theme->settings->h5pcontentmaxwidth.";\n";
     }
 
     // Overwrite Boost core SCSS variables which are stored in a SCSS map and thus couldn't be added to $configurable above.
@@ -151,6 +204,7 @@ function theme_boost_union_get_pre_scss($theme) {
  * @return string
  */
 function theme_boost_union_get_extra_scss($theme) {
+    // Initialize extra SCSS.
     $content = '';
 
     // You might think that this extra SCSS function is only called for the activated theme.
@@ -164,6 +218,48 @@ function theme_boost_union_get_extra_scss($theme) {
     // We have to accept this fact here and must not copy the code from theme_boost_get_extra_scss into this function.
     // Instead, we must only add additionally CSS code which is based on any Boost Union-only functionality.
 
+    // In contrast to Boost core, Boost Union should add the login page background to the body element as well.
+    // Thus, check if a login background image is set.
+    $loginbackgroundimagepresent = get_config('theme_boost_union', 'loginbackgroundimage');
+    if (!empty($loginbackgroundimagepresent)) {
+        // We first have to revert the background which is set to #page on the login page by Boost core already.
+        // Doing this, we also have to make the background of the #page element transparent on the login page.
+        $content .= 'body.pagelayout-login #page { ';
+        $content .= "background-image: none !important;";
+        $content .= "background-color: transparent !important;";
+        $content .= '}';
+
+        // Afterwards, we set the background-size attribute for the body element again.
+        $content .= 'body.pagelayout-login { ';
+        $content .= "background-size: cover;";
+        $content .= '}';
+
+        // Finally, we add all possible background image urls which will be picked based on the (random) loginpageimage class.
+        $content .= theme_boost_union_get_loginbackgroundimage_scss();
+    }
+
+    // Boost core has the behaviour that the normal background image is not shown on the login page, only the login background image
+    // is shown on the login page.
+    // This is fine, but it is done improperly as the normal background image is still there on the login page and just overlaid
+    // with a grey color in the #page element. This can result in flickering during the page load.
+    // We try to avoid this by removing the background image from the body tag if no login background image is set.
+    if (empty($loginbackgroundimagepresent)) {
+        $content .= 'body.pagelayout-login { ';
+        $content .= "background-image: none !important;";
+        $content .= '}';
+    }
+
+    // Lastly, we make sure that the background image is fixed and not repeated. Just to be sure.
+    $content .= 'body { ';
+    $content .= "background-repeat: no-repeat;";
+    $content .= "background-attachment: fixed;";
+    $content .= '}';
+
+    // Note: Boost Union is also capable of overriding the background image in its flavours.
+    // In contrast to the other flavour assets like the favicon overriding, this isn't done here in place as this function
+    // is composing Moodle core CSS which has to remain flavour-independent.
+    // Instead, the flavour is overriding the background image later in flavours/styles.php.
+
     return $content;
 }
 
@@ -174,7 +270,8 @@ function theme_boost_union_get_extra_scss($theme) {
  */
 function theme_boost_union_get_precompiled_css() {
     global $CFG;
-    return file_get_contents($CFG->dirroot . '/theme/boost_union/style/moodle.css');
+    // Get the fallback CSS file from Boost Core as long as Boost Union does not use a fallback file of its own.
+    return file_get_contents($CFG->dirroot . '/theme/boost/style/moodle.css');
 }
 
 /**
@@ -190,68 +287,83 @@ function theme_boost_union_get_precompiled_css() {
  * @return bool
  */
 function theme_boost_union_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = array()) {
+    global $CFG;
+
+    // Serve the files from the admin settings.
     if ($context->contextlevel == CONTEXT_SYSTEM && ($filearea === 'logo' || $filearea === 'backgroundimage' ||
-        $filearea === 'loginbackgroundimage' || $filearea === 'favicon')) {
+        $filearea === 'loginbackgroundimage' || $filearea === 'favicon' || $filearea === 'additionalresources' ||
+                $filearea === 'customfonts' || $filearea === 'fontawesome' || $filearea === 'courseheaderimagefallback' ||
+                preg_match("/tilebackgroundimage[2-9]|1[0-2]?/", $filearea))) {
         $theme = theme_config::load('boost_union');
         // By default, theme files must be cache-able by both browsers and proxies.
         if (!array_key_exists('cacheability', $options)) {
             $options['cacheability'] = 'public';
         }
         return $theme->setting_file_serve($filearea, $args, $forcedownload, $options);
+
+        // Serve the files from the theme flavours.
+    } else if ($filearea === 'flavours_look_logocompact' || $filearea === 'flavours_look_logo' ||
+            $filearea === 'flavours_look_favicon' || $filearea === 'flavours_look_backgroundimage') {
+        // Flavour files should not be top secret.
+        // Even if they apply to particular contexts or cohorts, we do not do any hard checks if a user should be
+        // allowed to request a file.
+        // We just make sure that the forcelogin setting is respected. This is ok as there isn't any possibility
+        // to apply a flavour to the login page / for non-logged-in users at the moment.
+        if ($CFG->forcelogin) {
+            require_login();
+        }
+
+        // Get file storage.
+        $fs = get_file_storage();
+
+        // Get the file from the filestorage.
+        $filename = array_pop($args);
+        array_pop($args); // This is the themerev number in the $args array which is used for browser caching, here we ignore it.
+        $itemid = array_pop($args);
+        if ((!$file = $fs->get_file($context->id, 'theme_boost_union', $filearea, $itemid, '/', $filename)) ||
+                $file->is_directory()) {
+            send_file_not_found();
+        }
+
+        // Unlock session during file serving.
+        \core\session\manager::write_close();
+
+        // Send stored file (and cache it for 90 days, similar to other static assets within Moodle).
+        send_stored_file($file, DAYSECS * 90, 0, $forcedownload, $options);
+
     } else {
         send_file_not_found();
     }
 }
 
 /**
- * Process css for theme.
- * @param string $css
- * @param theme_config $theme
- * @return string css
- */
-function theme_boost_union_process_css($css, $theme) {
-    global $OUTPUT, $CFG;
-    $css = theme_boost_union_blockregion($css, $theme);
-    return $css;
-}
-
-/**
- * Get the Blocks region width.
- * @param string $css
- * @param theme_config $theme
- * @return string css
- */
-function theme_boost_union_blockregion($css, $theme) {
-
-    $leftregionwidth = (isset($theme->settings->leftregionwidth) &&
-                ($theme->settings->leftregionwidth != '')) ? $theme->settings->leftregionwidth : '300px';
-    $rightregionwidth = (isset($theme->settings->rightregionwidth) &&
-                 ($theme->settings->rightregionwidth != '')) ? $theme->settings->rightregionwidth : '300px';
-    $css = str_replace('[[leftregionwidth]]', $leftregionwidth, $css);
-    $css = str_replace('[[rightregionwidth]]', $rightregionwidth, $css);
-    return $css;
-}
-
-/**
- * Define additional block regions.
+ * Callback to add head elements.
  *
- * @param array $pageregions List of page regions.
- * @return array $regions
+ * We use this callback to inject the FontAwesome CSS code and the flavour's CSS code to the page.
+ *
+ * @return string
  */
-function theme_boost_union_additional_regions($pageregions=[]) {
-    $regions = [
-        'top' => 'outside-top',
-        'footerleft' => 'footer-left',
-        'footerright' => 'footer-right',
-        'footercenter' => 'footer-center',
-        'offcanvasleft' => 'offcanvas-left',
-        'offcanvasright' => 'offcanvas-right',
-        'offcanvascenter' => 'offcanvas-center',
-        'left' => 'outside-left',
-        'right' => 'outside-right',
-        'bottom' => 'outside-bottom',
-        'headertop' => 'header-top'
-    ];
+function theme_boost_union_before_standard_html_head() {
+    global $CFG;
 
-    return ($pageregions) ? array_intersect($regions, $pageregions) : $regions;
+    // Initialize HTML (even though we do not add any HTML at this stage of the implementation).
+    $html = '';
+
+    // If another theme than Boost Union is active, return directly.
+    // This is necessary as the before_standard_html_head() callback is called regardless of the active theme.
+    if ($CFG->theme != 'boost_union') {
+        return $html;
+    }
+
+    // Require local library.
+    require_once($CFG->dirroot . '/theme/boost_union/locallib.php');
+
+    // Add the FontAwesome icons to the page.
+    theme_boost_union_add_fontawesome_to_page();
+
+    // Add the flavour CSS to the page.
+    theme_boost_union_add_flavourcss_to_page();
+
+    // Return an empty string to keep the caller happy.
+    return $html;
 }

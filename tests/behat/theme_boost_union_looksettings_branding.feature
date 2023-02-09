@@ -21,7 +21,7 @@ Feature: Configuring the theme_boost_union plugin for the "Branding" tab on the 
   Scenario: Setting: Favicon - Upload a custom favicon
     When I log in as "admin"
     And I navigate to "Appearance > Boost Union > Look" in site administration
-    And I click on "Branding" "link"
+    And I click on "Branding" "link" in the "#adminsettings .nav-tabs" "css_element"
     And I upload "theme/boost_union/tests/fixtures/favicon.ico" file to "Favicon" filemanager
     And I press "Save changes"
     # We can't check the uploaded favicon visually, but we can verify that the site's favicon is not shipped by pluginfile.php (for uploaded files) and not by theme/image.php (for image files from disk) anymore.

@@ -25,6 +25,7 @@
  * * Include course related hints
  * * Include back to top button
  * * Include activity navigation
+ * * Include additional block regions
  *
  * @package   theme_boost_union
  * @copyright 2022 Luca Bösch, BFH Bern University of Applied Sciences luca.boesch@bfh.ch
@@ -40,7 +41,6 @@ require_once($CFG->dirroot . '/course/lib.php');
 // Require own locallib.php.
 require_once($CFG->dirroot . '/theme/boost_union/locallib.php');
 
-global $PAGE;
 // Add activity navigation if the feature is enabled.
 $activitynavigation = get_config('theme_boost_union', 'activitynavigation');
 if ($activitynavigation == THEME_BOOST_UNION_SETTING_SELECT_YES) {
@@ -105,13 +105,11 @@ $regionmainsettingsmenu = $buildregionmainsettings ? $OUTPUT->region_main_settin
 $header = $PAGE->activityheader;
 $headercontent = $header->export_for_template($renderer);
 
-
 $templatecontext = [
     'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]),
     'output' => $OUTPUT,
     'sidepreblocks' => $blockshtml,
     'hasblocks' => $hasblocks,
-    'user_is_editing' => $OUTPUT->page->user_is_editing(),
     'bodyattributes' => $bodyattributes,
     'courseindexopen' => $courseindexopen,
     'blockdraweropen' => $blockdraweropen,
@@ -127,8 +125,10 @@ $templatecontext = [
     'overflow' => $overflow,
     'headercontent' => $headercontent,
     'addblockbutton' => $addblockbutton,
-    'regionplacement' => get_config('theme_boost_union', 'regionplacement') == 0 ?
-            'blocks-next-maincontent' : 'blocks-near-window',
+    'user_is_editing' => $OUTPUT->page->user_is_editing(),
+    'outsideregionsplacement' => get_config('theme_boost_union', 'outsideregionsplacement') ==
+            THEME_BOOST_UNION_SETTING_OUTSIDEREGIONSPLACEMENT_NEXTMAINCONTENT ?
+                    'blocks-next-maincontent' : 'blocks-near-windowedges',
 ];
 
 // Get and use the course related hints HTML code, if any hints are configured.
@@ -136,10 +136,12 @@ $courserelatedhintshtml = theme_boost_union_get_course_related_hints();
 if ($courserelatedhintshtml) {
     $templatecontext['courserelatedhints'] = $courserelatedhintshtml;
 }
-// Includes Addtional Block regions.
-require_once(__DIR__ . '/includes/blockregions.php');
+
 // Include the template content for the course related hints.
 require_once(__DIR__ . '/includes/courserelatedhints.php');
+
+// Include the template content for the block regions.
+require_once(__DIR__ . '/includes/blockregions.php');
 
 // Include the content for the back to top button.
 require_once(__DIR__ . '/includes/backtotopbutton.php');
@@ -158,6 +160,11 @@ require_once(__DIR__ . '/includes/javascriptdisabledhint.php');
 
 // Include the template content for the info banners.
 require_once(__DIR__ . '/includes/infobanners.php');
+
+// Include the template content for the advertisement tiles, but only if we are on the frontpage.
+if ($PAGE->pagelayout == 'frontpage') {
+    require_once(__DIR__ . '/includes/advertisementtiles.php');
+}
 
 // Render drawers.mustache from boost_union.
 echo $OUTPUT->render_from_template('theme_boost_union/drawers', $templatecontext);

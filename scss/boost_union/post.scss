@@ -1,4 +1,68 @@
 /*=======================================
+ * Settings: Look -> Login page
+ ======================================*/
+
+/*---------------------------------------
+ * Setting: Login form position
+ --------------------------------------*/
+
+/* Move the login window to the side based on the theme settings.
+   While the classes login-wrapper-left and login-wrapper-right are set here,
+   the class login-wrapper-center is not set here as the login form is already centered by Moodle core. */
+.login-wrapper.login-wrapper-left {
+    justify-content: left;
+}
+.login-wrapper.login-wrapper-right {
+    justify-content: right;
+}
+
+/*---------------------------------------
+ * Setting: Login form transparency
+ --------------------------------------*/
+
+/* Make background of login panel slightly transparent. */
+.login-container.login-container-80t {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+
+/*=======================================
+ * Settings: Look -> Course
+ ======================================*/
+
+/*---------------------------------------
+ * Setting: Course header image.
+ --------------------------------------*/
+#courseheaderimage {
+    background-size: cover;
+    @include border-radius();
+}
+.courseheaderimage-dark {
+    color: white;
+    text-shadow: 0 0 5px black;
+}
+.courseheaderimage-light {
+    color: black;
+    text-shadow: 0 0 5px white;
+}
+
+/*=======================================
+ * Settings: Look -> Resources
+ ======================================*/
+
+/*---------------------------------------
+ * Setting: Additional resources.
+ --------------------------------------*/
+
+/* Enlarge the icons in the settings file lists. */
+.settings-additionalresources-filelist .icon,
+.settings-customfonts-filelist .icon {
+    height: 64px;
+    width: 64px;
+}
+
+
+/*=======================================
  * Settings: Feel -> Navigation.
  ======================================*/
 
@@ -38,31 +102,145 @@
  * Settings: Content -> Footnote.
  ======================================*/
 
-/* Add horizontal margin to align the footnote with the main page content. */
+/* Static pages links dividers. */
 #footnote {
-    /* On larger screens. */
-    @include media-breakpoint-up(md) {
-        margin-left: calc(15px + .5rem);
-        margin-right: calc(15px + .5rem);
+    .theme_boost_union_footnote_link {
+        border-right: 2px solid $nav-divider-color;
     }
-    /* And on smaller screens. */
-    @include media-breakpoint-down(sm) {
-        margin-left: 15px;
-        margin-right: 15px;
-    }
-    /* And on really small screens, a left padding is added as well as the footer links appear then instead of the
-       footer icons and everything should align well. */
-    @include media-breakpoint-down(sm) {
-        padding-left: 1rem;
+    .theme_boost_union_footnote_link:last-of-type {
+        border-right: none;
     }
 }
-/* On the login page, the footnote does not need a border-top as the login page has a grey background already.
-   Only on really small screens, the border top is helpful there. */
-@include media-breakpoint-up(sm) {
-    #page-login-index #footnote {
-        /* stylelint-disable-next-line declaration-no-important */
-        border-top: none !important;
+
+/* The footnote styles are different on the login page and on all non-login pages.
+   They are also different on larger and smaller screens.
+   We will deal with the overall cases for all screen sizes first and will then overwrite the things which need
+   to be different on the login page. */
+
+/* On larger screens. */
+@include media-breakpoint-up(md) {
+    /* If there is a background image or a loginbackground image configured. */
+    body.backgroundimage #footnote,
+    body.loginbackgroundimage #footnote {
+        /* Add horizontal padding to align the footnote with the main page content.
+           The numbers are basically adopted from the main content areas of the Moodle page. */
+        padding-left: calc(15px + .5rem);
+        padding-right: calc(15px + .5rem);
+
+        /* Add white background color, border radius and a small bottom margin
+           to make the footnote work with background images. */
+        @include border-radius();
+        background-color: $white;
+        margin-bottom: 1rem;
     }
+
+    /* If there isn't a background image nor a loginbackground image configured. */
+    body:not(.backgroundimage):not(.loginbackgroundimage) #footnote {
+        /* Add horizontal margin to align the footnote with the main page content.
+           The numbers are basically adopted from the main content areas of the Moodle page. */
+        margin-left: calc(15px + .5rem);
+        margin-right: calc(15px + .5rem);
+
+        /* Add top border. */
+        border-top: $border-width solid $border-color;
+    }
+}
+
+/* And on smaller screens. */
+@include media-breakpoint-only(sm) {
+    #footnote {
+        /* On smaller screens, there isn't any background image, so there's no need for a white background. */
+
+        /* Add horizontal margin and padding to align the footnote with the main page content.
+           The numbers are adopted from the main content areas of the Moodle page.
+           Add another right padding as well to avoid that the content gets covered by the footer and back-to-top
+           buttons. */
+        margin-left: .5rem;
+        padding-left: 15px;
+        margin-right: .5rem;
+        padding-right: 51px; /* The underlying calculation is 15px + 36px. */
+
+        /* Add top border. */
+        border-top: $border-width solid $border-color;
+    }
+}
+
+/* And on really small screens. */
+@include media-breakpoint-down(xs) {
+    #footnote {
+        /* On really small screens, there isn't any background image, so there's no need for a white background. */
+
+        /* Add horizontal margin and padding to align the footnote with the main page content.
+           The numbers are adopted from the main content areas of the Moodle page.
+           Add another right padding as well to avoid that the content gets covered by the back-to-top button. */
+        margin-left: 15px;
+        padding-left: 1rem;
+        margin-right: 15px;
+        padding-right: calc(1rem + 36px);
+
+        /* Add top border. */
+        border-top: $border-width solid $border-color;
+    }
+}
+
+/* As said, the login needs some more adjustments. */
+
+/* On larger screens. */
+@include media-breakpoint-up(sm) {
+    /* If there is a loginbackground image configured. */
+    body.pagelayout-login.loginbackgroundimage #footnote {
+        /* Add a box shadow to the footnote to match the look of the login box. */
+        box-shadow: $logincontainer-shadow;
+
+        /* Add horizontal margin as the page does not have a margin itself. */
+        margin-left: 15px;
+        margin-right: 15px;
+
+        /* Add another right padding as well to avoid that the content gets covered by the footer button. */
+        padding-right: calc(.5rem + 51px); /* The underlying calculation is 15px + .5rem + 36px. */
+    }
+}
+
+/* On smaller screens. */
+@include media-breakpoint-only(sm) {
+    /* If there is a loginbackground image configured. */
+    body.pagelayout-login.loginbackgroundimage #footnote {
+        /* Add white background color and a small bottom margin
+           to make the footnote work with background images.
+           This is necessary as this isn't covered by the normal background styles already
+           (which are only applied to pages > 768px.
+           Note that there isn't a border-radius added as the login box doesn't have a border radius as well
+           on this screen size. */
+        background-color: $white;
+        margin-bottom: 1rem;
+    }
+}
+
+/* And on really small screens. */
+@include media-breakpoint-down(xs) {
+    body.pagelayout-login.loginbackgroundimage #footnote {
+        /* Add white background color and a small bottom margin
+           to make the footnote work with background images.
+           This is necessary as this isn't covered by the normal background styles already
+           (which are only applied to pages > 768px. */
+        background-color: $white;
+
+        /* Change horizontal margin and padding to
+           to make the footnote work with background images.
+           We do not need any additional right padding as there isn't a back-to-top button nor a footer button
+           on the login page on this screen size. */
+        margin-left: 0;
+        padding-left: calc(15px + 1rem);
+        margin-right: 0;
+        padding-right: calc(15px + 1rem);
+    }
+}
+
+/* On all screen sizes. */
+/* If there isn't a loginbackground image configured. */
+body.pagelayout-login:not(.loginbackgroundimage) #footnote {
+    /* Remove the top border as there is the gradient in #page. */
+    border-top: none;
 }
 
 
@@ -73,6 +251,26 @@
 /* Remove margin after last paragraph for a nicer look. */
 .themeboostunioninfobanner p:last-child {
     margin-bottom: 0;
+}
+
+/*=======================================
+ * Settings: Content -> Advertisement tiles.
+ ======================================*/
+
+/* Remove horizontal paddings on the tile container on smaller screens to align it with the main frontpage content. */
+@include media-breakpoint-down(sm) {
+    #themeboostunionadvtiles {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+/* Style the advertisement tile cards. */
+#themeboostunionadvtiles [class*="col-"] .card {
+    background-size: cover;
+    /* d-flex align-items-stretch align-self-stretch classes in mustache template require to set width to inherit
+       (Otherwise width is flexible dependent on content). */
+    width: inherit;
 }
 
 

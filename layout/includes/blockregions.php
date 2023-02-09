@@ -18,7 +18,7 @@
  * Theme Boost Union - Additional regions.
  *
  * @package   theme_boost_union
- * @copyright 2022 Luca Bösch, BFH Bern University of Applied Sciences luca.boesch@bfh.ch
+ * @copyright 2022 bdecent gmbh <https://bdecent.de>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -34,20 +34,20 @@ require_once($CFG->dirroot . '/theme/boost_union/locallib.php');
  * Add to the additional block regions.
  *
  * @package    theme_boost_union
- * @copyright  2022 Moodle an Hochschulen e.V. <kontakt@moodle-an-hochschulen.de>
+ * @copyright  2022 bdecent gmbh <https://bdecent.de>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class additionalregions {
 
     /**
      * Constructor.
-     * Get the all regions in theme_boost_union_additional_regions function.
+     * Get the all regions in theme_boost_union_get_additional_regions function.
      */
     public function __construct() {
         global $PAGE;
-        $this->page = $PAGE;
-        $pageregions = $this->page->blocks->get_regions();
-        $this->regions = theme_boost_union_additional_regions($pageregions);
+
+        $pageregions = $PAGE->blocks->get_regions();
+        $this->regions = theme_boost_union_get_additional_regions($pageregions);
     }
 
     /**
@@ -58,17 +58,17 @@ class additionalregions {
      * @return array $regionsdata
      */
     public function regionsdata() {
-        global $OUTPUT;
+        global $OUTPUT, $PAGE;
         $regionsdata = [];
         foreach ($this->regions as $name => $region) {
 
-            if (!has_capability('theme/boost_union:viewregion'.$name, $this->page->context)) {
+            if (!has_capability('theme/boost_union:viewregion'.$name, $PAGE->context)) {
                 $regionsdata[$name] = ['hasblocks' => false];
                 continue;
             }
 
             $regionhtml = $OUTPUT->blocks($region);
-            $blockbutton = (has_capability('theme/boost_union:editregion'.$name, $this->page->context)) ?
+            $blockbutton = (has_capability('theme/boost_union:editregion'.$name, $PAGE->context)) ?
                              $OUTPUT->addblockbutton($region) : '';
             $regionsdata[$name] = [
                 'hasblocks' => (strpos($regionhtml, 'data-block=') !== false || !empty($blockbutton)),
@@ -99,7 +99,7 @@ class additionalregions {
 
     /**
      * Calculate region hasblocks count and add column classes for additional block regions.
-     * @param array $regions List of regions to gnereate class. i.e Footer and Canvas regions
+     * @param array $regions List of regions to generate class. i.e Footer and Canvas regions
      * @param array $regionsdata
      * @return array set of region contents
      */
