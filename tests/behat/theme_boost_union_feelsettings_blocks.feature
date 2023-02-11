@@ -22,7 +22,7 @@ Feature: Configuring the theme_boost_union plugin for the "Blocks" tab on the "F
       | teacher1 | C1     | editingteacher |
       | student1 | C1     | student        |
 
-  @javascript
+  # @javascript
   # Scenario Outline: Additional Boost Union block regions: left, right, top, bottom, footerleft, footerright, footercenter.
   #   When I log in as "admin"
   #   And I turn editing mode on
@@ -331,11 +331,12 @@ Feature: Configuring the theme_boost_union plugin for the "Blocks" tab on the "F
 
     And I navigate to "Appearance > Themes > Boost Union > Feel" in site administration
     Then I click on "Blocks" "link"
-    And I should see "Block regions for dashboard layout"
+    And I should see "Block regions for frontpage layout"
     And I set the following fields to these values:
-      | Block regions for dashboard layout| outside-bottom, offcanvas-right, offcanvas-left, footer-right, footer-center|
+      | Block regions for frontpage layout| outside-bottom, offcanvas-right, offcanvas-left, footer-right, footer-center|
     Then I press "Save changes"
     And I follow "Home"
+    And ".block-region-top#topregion" "css_element" should not exist
     And ".block-region-left#leftblock" "css_element" should not exist
     And ".block-region-right#rightblock" "css_element" should not exist
     And ".block-region-headertop#headertopregion" "css_element" should not exist
