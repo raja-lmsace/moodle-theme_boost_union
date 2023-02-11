@@ -347,4 +347,3 @@ Feature: Configuring the theme_boost_union plugin for the "Blocks" tab on the "F
     And I should see "Add a block" in the ".block-region-offcanvasright#offcanvasregionright" "css_element"
     And I should see "Add a block" in the ".block-region-footer-right#footerright" "css_element"
     And I should see "Add a block" in the ".block-region-footer-center#footercenter" "css_element"
-
