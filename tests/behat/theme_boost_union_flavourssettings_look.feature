@@ -1,4 +1,4 @@
-@theme @theme_boost_union @theme_boost_union_flavourssettings @theme_boost_union_flavourssettings_look
+  @theme @theme_boost_union @theme_boost_union_flavourssettings @theme_boost_union_flavourssettings_look
 Feature: Configuring the theme_boost_union plugin on the "Flavours" page, applying the look features
   In order to use the features
   As admin
